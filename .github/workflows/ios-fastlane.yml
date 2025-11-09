@@ -1,12 +1,5 @@
-$KeyId    = "ABCDE12345"
-$IssuerId = "11223344-5566-7788-99aa-bbccddeeff00"
-$P8Path   = "C:\keys\AuthKey_ABCDE12345.p8"
-$P8       = Get-Content -Raw -Path $P8Path
-$Obj = [ordered]@{
-  key_id    = $KeyId
-  issuer_id = $IssuerId
-  key       = $P8
+{
+  "key_id": "ABC123DEFG",
+  "issuer_id": "00000000-0000-0000-0000-000000000000",
+  "key": "-----BEGIN PRIVATE KEY-----\nMIGTAgE...snip...\n-----END PRIVATE KEY-----"
 }
-$Json = $Obj | ConvertTo-Json -Depth 5
-$Json | Set-Content -Path "$env:TEMP\\asc_api_key.json" -Encoding UTF8
-Write-Host "JSON written to $env:TEMP\\asc_api_key.json"
