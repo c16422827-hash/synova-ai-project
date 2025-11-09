@@ -1,0 +1,47 @@
+name: iOS Fastlane (Template)
+
+on:
+  workflow_dispatch:
+
+jobs:
+  ios:
+    runs-on: macos-14
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.2'
+          bundler-cache: true
+      - name: Install Fastlane
+        run: |
+          gem install fastlane
+      - name: Prepare App Store Connect API key
+        if: ${{ secrets.APP_STORE_CONNECT_API_KEY_JSON != '' }}
+        uses: actions/github-script@v7
+        env:
+          SECRET_INPUT: ${{ secrets.APP_STORE_CONNECT_API_KEY_JSON }}
+        with:
+          script: |
+            const fs = require('fs');
+            const path = require('path');
+            const workspace = process.env.GITHUB_WORKSPACE;
+            const dir = path.join(workspace, 'fastlane');
+            const file = path.join(dir, 'asc-api-key.json');
+            const secret = process.env.SECRET_INPUT;
+            if (!secret) { core.setFailed('Missing SECRET_INPUT'); return; }
+            fs.mkdirSync(dir, { recursive: true });
+            fs.writeFileSync(file, secret, { encoding: 'utf8' });
+            core.exportVariable('FASTLANE_APP_STORE_CONNECT_API_KEY_FILE', file);
+      - name: Skip – secret not available
+        if: ${{ secrets.APP_STORE_CONNECT_API_KEY_JSON == '' }}
+        run: echo "APP_STORE_CONNECT_API_KEY_JSON is not available for this run."
+      - name: Verify key file
+        if: ${{ secrets.APP_STORE_CONNECT_API_KEY_JSON != '' }}
+        run: |
+          test -f fastlane/asc-api-key.json && echo "Key file present" || (echo "Key file missing" && exit 1)
+      - name: Run Fastlane (template)
+        if: ${{ secrets.APP_STORE_CONNECT_API_KEY_JSON != '' }}
+        run: |
+          echo "This is a template. Ensure your iOS project and Fastlane files exist."
+          fastlane release || true

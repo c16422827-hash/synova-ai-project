@@ -1,0 +1,13 @@
+{
+  "name": "synova-ai-project",
+  "private": true,
+  "version": "0.1.0",
+  "scripts": {
+    "lint:md": "markdownlint README.md synova_deployment_guide.md",
+    "prepare": "husky install"
+  },
+  "devDependencies": {
+    "husky": "^9.1.6",
+    "markdownlint-cli": "^0.39.0"
+  }
+}

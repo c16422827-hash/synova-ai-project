@@ -1,0 +1,24 @@
+name: Docs Lint (markdownlint + cspell)
+
+on:
+  pull_request:
+  push:
+    branches: [ main ]
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Install linters
+        run: |
+          npm install -g markdownlint-cli cspell
+      - name: Run markdownlint
+        run: |
+          markdownlint "**/*.md" || true
+      - name: Run cspell
+        run: |
+          cspell "**/*" --no-progress --no-must-find-files || true
