@@ -9,19 +9,17 @@ jobs:
   lint:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-          
-      - name: Install linters
-        run: npm install -g markdownlint-cli cspell
-        
+      - name: Checkout code
+        uses: actions/checkout@v4
+
       - name: Run markdownlint
-        # Removed "|| true" to make the job fail on errors
-        run: markdownlint "**/*.md"
-        
+        # This action automatically finds and uses your .markdownlint.json
+        uses: davidanson/markdownlint-cli2-action@v16
+        with:
+          # This tells the linter to scan all .md files in the repo
+          globs: |
+            **/*.md
+
       - name: Run cspell
-        # Removed "|| true" and fixed globbing
-        # Checking "**/*" is dangerous; this checks common text files instead.
-        run: cspell "**/*.{md,txt,json,yml,js,ts}" --no-progress --no-must-find-files
+        # This action automatically finds and uses your cspell.json
+        uses: streetsidesoftware/cspell-action@v6
