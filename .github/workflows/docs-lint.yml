@@ -13,12 +13,15 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '20'
+          
       - name: Install linters
-        run: |
-          npm install -g markdownlint-cli cspell
+        run: npm install -g markdownlint-cli cspell
+        
       - name: Run markdownlint
-        run: |
-          markdownlint "**/*.md" || true
+        # Removed "|| true" to make the job fail on errors
+        run: markdownlint "**/*.md"
+        
       - name: Run cspell
-        run: |
-          cspell "**/*" --no-progress --no-must-find-files || true
+        # Removed "|| true" and fixed globbing
+        # Checking "**/*" is dangerous; this checks common text files instead.
+        run: cspell "**/*.{md,txt,json,yml,js,ts}" --no-progress --no-must-find-files
