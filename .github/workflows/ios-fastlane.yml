@@ -1,5 +1,1 @@
-{
-  "key_id": "ABC123DEFG",
-  "issuer_id": "00000000-0000-0000-0000-000000000000",
-  "key": "-----BEGIN PRIVATE KEY-----\nMIGTAgE...snip...\n-----END PRIVATE KEY-----"
-}
+name: Create App Store Connect API key file env: ASC_KEY_ID: ${{ secrets.APP_STORE_CONNECT_KEY_ID }} ASC_ISSUER_ID: ${{ secrets.APP_STORE_CONNECT_ISSUER_ID }} ASC_PRIVATE_KEY: ${{ secrets.APP_STORE_CONNECT_PRIVATE_KEY }} run: | mkdir -p "$RUNNER_TEMP"
