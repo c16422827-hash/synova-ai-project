@@ -25,6 +25,7 @@
     "CDK",
     "Claude",
     "CLI",
+    "cirq",
     "cocoapods",
     "CocoaPods",
     "CUDA",
@@ -32,6 +33,7 @@
     "distributables",
     "Docker",
     "dwave",
+    "elif",
     "EEG",
     "Electron",
     "Emotiv",
@@ -95,5 +97,10 @@
     "xcworkspace",
     "XGBoost",
     "yourcompany"
+  ],
+  "ignorePaths": [
+    "node_modules/**",
+    "dist/**",
+    "*.log"
   ]
 }
