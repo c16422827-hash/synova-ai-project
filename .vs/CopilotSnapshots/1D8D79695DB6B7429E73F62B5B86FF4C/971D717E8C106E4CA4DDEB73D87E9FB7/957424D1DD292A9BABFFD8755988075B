@@ -1,4 +1,4 @@
-"""
+﻿"""
 Synova AI - Quantum-Neural Hybrid Intelligence System
 Core Engine Implementation v1.0.0
 
@@ -16,11 +16,14 @@ License: Proprietary - All Rights Reserved
 """
 
 import asyncio
+import threading
 import logging
-from typing import Dict, Any, List, Optional
-from dataclasses import dataclass
-from datetime import datetime
+from typing import Dict, Any, List, Optional, Union
+from dataclasses import dataclass, asdict
+from datetime import datetime, timedelta
 from enum import Enum
+import numpy as np
+import json
 import uuid
 
 class SynovaMode(Enum):
@@ -57,92 +60,6 @@ class UserProfile:
     behavioral_model: Optional[Dict] = None
     neural_signature: Optional[Dict] = None
     last_updated: datetime = None
-
-# Safe import helpers: try to import modules, otherwise provide lightweight stubs
-def _safe_import_temporal_engine():
-    try:
-        from .temporal_weave_engine import TemporalEngine
-        return TemporalEngine
-    except Exception:
-        class TemporalEngineStub:
-            def analyze_temporal_patterns(self, *args, **kwargs):
-                async def _inner(*a, **k):
-                    return {}
-                return asyncio.get_event_loop().run_until_complete(_inner())
-        return TemporalEngineStub
-
-def _safe_import_neuro_symbolic_engine():
-    try:
-        from .neuro_symbiotic_fusion import NeuroSymbolicEngine
-        return NeuroSymbolicEngine
-    except Exception:
-        class NeuroSymbolicEngineStub:
-            async def reason(self, query, context):
-                return {"symbolic_insights": "stub"}
-        return NeuroSymbolicEngineStub
-
-def _safe_import_ethics_guardian():
-    try:
-        from .ethical_singularity_guardian import EthicsGuardian
-        return EthicsGuardian
-    except Exception:
-        class EthicsResult:
-            def __init__(self, approved=True, reason=""):
-                self.approved = approved
-                self.reason = reason
-
-        class EthicsGuardianStub:
-            def __init__(self, level="standard"):
-                pass
-            async def validate_query(self, query, context):
-                return EthicsResult(True, "")
-        return EthicsGuardianStub
-
-def _safe_import_quantum_processor():
-    try:
-        from .quantum_echo_prediction import QuantumProcessor
-        return QuantumProcessor
-    except Exception:
-        class QuantumProcessorStub:
-            async def quantum_enhance_prediction(self, query, classical_result, context):
-                return {"quantum_enhancement": "stub"}
-        return QuantumProcessorStub
-
-def _safe_import_behavior_predictor():
-    try:
-        from .behavioral_prediction_matrix import BehaviorPredictor
-        return BehaviorPredictor
-    except Exception:
-        class BehaviorPredictorStub:
-            async def predict_user_needs(self, query, user_profile, temporal_context):
-                return {"predicted_needs": []}
-            async def deep_pattern_analysis(self, user_profile):
-                return {}
-        return BehaviorPredictorStub
-
-def _safe_import_evolution_engine():
-    try:
-        from .self_evolution_core import EvolutionEngine
-        return EvolutionEngine
-    except Exception:
-        class EvolutionEngineStub:
-            async def evolve_system(self, metrics, user_profiles):
-                return {"evolution": "stub"}
-            async def trigger_evolution(self):
-                return {"triggered": True}
-        return EvolutionEngineStub
-
-def _safe_import_mind_interface():
-    try:
-        from .mind_resonance_interface import MindInterface
-        return MindInterface
-    except Exception:
-        class MindInterfaceStub:
-            async def process_neural_signals(self, user_profile):
-                return {"error": "MindInterface not available"}
-            async def decode_thought_patterns(self, user_profile):
-                return {"decoded_thoughts": []}
-        return MindInterfaceStub
 
 class SynovaCore:
     """
@@ -192,57 +109,32 @@ class SynovaCore:
         self.logger.info(f"Initializing Synova AI in {self.config.mode.value} mode")
 
         # Always initialize basic components
-        TemporalEngine = _safe_import_temporal_engine()
-        NeuroSymbolicEngine = _safe_import_neuro_symbolic_engine()
-        EthicsGuardian = _safe_import_ethics_guardian()
+        from .temporal_weave_engine import TemporalEngine
+        from .neuro_symbiotic_fusion import NeuroSymbolicEngine
+        from .ethical_singularity_guardian import EthicsGuardian
 
-        # Instantiate components (if stubs, they provide minimal async behaviour)
-        try:
-            self.temporal_engine = TemporalEngine()
-        except Exception:
-            # If the class is async-only or different signature, use stub instance
-            self.temporal_engine = TemporalEngine
-
-        try:
-            self.neuro_symbolic_engine = NeuroSymbolicEngine()
-        except Exception:
-            self.neuro_symbolic_engine = NeuroSymbolicEngine
-
-        try:
-            self.ethics_guardian = EthicsGuardian(level=self.config.ethics_level)
-        except Exception:
-            self.ethics_guardian = EthicsGuardian()
+        self.temporal_engine = TemporalEngine()
+        self.neuro_symbolic_engine = NeuroSymbolicEngine()
+        self.ethics_guardian = EthicsGuardian(level=self.config.ethics_level)
 
         # Initialize advanced components based on tier
         if self.config.mode in [SynovaMode.AERIAL, SynovaMode.CELESTIAL]:
-            QuantumProcessor = _safe_import_quantum_processor()
-            BehaviorPredictor = _safe_import_behavior_predictor()
+            from .quantum_echo_prediction import QuantumProcessor
+            from .behavioral_prediction_matrix import BehaviorPredictor
 
             if self.config.quantum_enabled:
-                try:
-                    self.quantum_processor = QuantumProcessor()
-                except Exception:
-                    self.quantum_processor = QuantumProcessor
-            try:
-                self.behavior_predictor = BehaviorPredictor()
-            except Exception:
-                self.behavior_predictor = BehaviorPredictor
+                self.quantum_processor = QuantumProcessor()
+            self.behavior_predictor = BehaviorPredictor()
 
         # Initialize premium components for Celestial tier
         if self.config.mode == SynovaMode.CELESTIAL:
-            EvolutionEngine = _safe_import_evolution_engine()
-            MindInterface = _safe_import_mind_interface()
+            from .self_evolution_core import EvolutionEngine
+            from .mind_resonance_interface import MindInterface
 
             if self.config.evolution_enabled:
-                try:
-                    self.evolution_core = EvolutionEngine()
-                except Exception:
-                    self.evolution_core = EvolutionEngine
+                self.evolution_core = EvolutionEngine()
             if self.config.bci_enabled:
-                try:
-                    self.mind_interface = MindInterface()
-                except Exception:
-                    self.mind_interface = MindInterface
+                self.mind_interface = MindInterface()
 
     async def process_query(self, query: str, user_id: str, context: Optional[Dict] = None) -> Dict[str, Any]:
         """
@@ -253,17 +145,11 @@ class SynovaCore:
 
         try:
             # 1. Ethics and Safety Check
-            # Support both sync and async validate_query implementations
-            ethics_validate = getattr(self.ethics_guardian, 'validate_query', None)
-            if asyncio.iscoroutinefunction(ethics_validate):
-                ethics_result = await ethics_validate(query, context)
-            else:
-                ethics_result = ethics_validate(query, context)
-
-            if not getattr(ethics_result, 'approved', True):
+            ethics_result = await self.ethics_guardian.validate_query(query, context)
+            if not ethics_result.approved:
                 return self._create_response(
                     "I cannot process this request as it violates ethical guidelines.",
-                    getattr(ethics_result, 'reason', ''),
+                    ethics_result.reason,
                     start_time
                 )
 
@@ -272,12 +158,9 @@ class SynovaCore:
             personalized_context = await self._enhance_context_with_user_data(context, user_profile)
 
             # 3. Temporal Context Integration
-            # Support async analyze_temporal_patterns
-            analyze_temporal = getattr(self.temporal_engine, 'analyze_temporal_patterns', None)
-            if asyncio.iscoroutinefunction(analyze_temporal):
-                temporal_context = await analyze_temporal(query, personalized_context, user_profile.interaction_history)
-            else:
-                temporal_context = analyze_temporal(query, personalized_context, user_profile.interaction_history)
+            temporal_context = await self.temporal_engine.analyze_temporal_patterns(
+                query, personalized_context, user_profile.interaction_history
+            )
 
             # 4. Multi-modal Reasoning Pipeline
             reasoning_results = await self._execute_reasoning_pipeline(
@@ -293,10 +176,7 @@ class SynovaCore:
 
             # 7. Self-Evolution Trigger (Celestial tier only)
             if self.evolution_core and self._should_evolve():
-                try:
-                    asyncio.create_task(self.evolution_core.trigger_evolution())
-                except Exception:
-                    pass
+                asyncio.create_task(self.evolution_core.trigger_evolution())
 
             return response
 
@@ -312,38 +192,26 @@ class SynovaCore:
         results = {}
 
         # Neuro-Symbolic Reasoning (Always available)
-        reason_func = getattr(self.neuro_symbolic_engine, 'reason', None)
-        if asyncio.iscoroutinefunction(reason_func):
-            results['symbolic'] = await reason_func(query, context)
-        else:
-            results['symbolic'] = reason_func(query, context)
+        results['symbolic'] = await self.neuro_symbolic_engine.reason(query, context)
 
         # Quantum Processing (Aerial/Celestial)
         if self.quantum_processor:
             self.state = ProcessingState.QUANTUM_PROCESSING
-            qfunc = getattr(self.quantum_processor, 'quantum_enhance_prediction', None)
-            if asyncio.iscoroutinefunction(qfunc):
-                results['quantum'] = await qfunc(query, results['symbolic'], temporal_context)
-            else:
-                results['quantum'] = qfunc(query, results['symbolic'], temporal_context)
+            results['quantum'] = await self.quantum_processor.quantum_enhance_prediction(
+                query, results['symbolic'], temporal_context
+            )
             self.metrics["quantum_operations"] += 1
 
         # Behavioral Prediction (Aerial/Celestial)
         if self.behavior_predictor:
-            bfunc = getattr(self.behavior_predictor, 'predict_user_needs', None)
-            if asyncio.iscoroutinefunction(bfunc):
-                results['behavioral'] = await bfunc(query, user_profile, temporal_context)
-            else:
-                results['behavioral'] = bfunc(query, user_profile, temporal_context)
+            results['behavioral'] = await self.behavior_predictor.predict_user_needs(
+                query, user_profile, temporal_context
+            )
 
         # Mind Interface Processing (Celestial only)
         if self.mind_interface:
             self.state = ProcessingState.INTERFACING
-            mfunc = getattr(self.mind_interface, 'process_neural_signals', None)
-            if asyncio.iscoroutinefunction(mfunc):
-                results['neural'] = await mfunc(user_profile)
-            else:
-                results['neural'] = mfunc(user_profile)
+            results['neural'] = await self.mind_interface.process_neural_signals(user_profile)
 
         return results
 
@@ -374,18 +242,10 @@ class SynovaCore:
         user_profile = await self._get_or_create_user_profile(user_id)
 
         # Analyze behavioral patterns
-        deep_func = getattr(self.behavior_predictor, 'deep_pattern_analysis', None)
-        if asyncio.iscoroutinefunction(deep_func):
-            behavioral_analysis = await deep_func(user_profile)
-        else:
-            behavioral_analysis = deep_func(user_profile)
+        behavioral_analysis = await self.behavior_predictor.deep_pattern_analysis(user_profile)
 
         # Neural signal processing
-        decode_func = getattr(self.mind_interface, 'decode_thought_patterns', None)
-        if asyncio.iscoroutinefunction(decode_func):
-            neural_patterns = await decode_func(user_profile)
-        else:
-            neural_patterns = decode_func(user_profile)
+        neural_patterns = await self.mind_interface.decode_thought_patterns(user_profile)
 
         # Predict likely queries/intentions
         predicted_intentions = await self._predict_user_intentions(
@@ -394,7 +254,7 @@ class SynovaCore:
 
         return {
             "predicted_thoughts": predicted_intentions,
-            "confidence_score": neural_patterns.get("confidence", 0.0) if isinstance(neural_patterns, dict) else 0.0,
+            "confidence_score": neural_patterns.get("confidence", 0.0),
             "behavioral_insights": behavioral_analysis,
             "recommendations": await self._generate_proactive_suggestions(predicted_intentions)
         }

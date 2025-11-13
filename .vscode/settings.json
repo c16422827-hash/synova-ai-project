@@ -6,5 +6,12 @@
         "cursor-global": true,
         "cursor-workspace": true
     },
-    "python-envs.pythonProjects": []
+    "python-envs.pythonProjects": [],
+    "cSpell.words": [
+        "cirq",
+        "difftool",
+        "mergetool",
+        "pydantic",
+        "vsdiffmerge"
+    ]
 }

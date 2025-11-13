@@ -1,4 +1,4 @@
-"""
+﻿"""
 Synova AI - Mind Resonance Interface
 Advanced Brain-Computer Interface for Thought-Based Interaction
 
@@ -14,11 +14,13 @@ Author: Neural Interface Research Lab
 """
 
 import numpy as np
+import asyncio
 import logging
-from typing import Dict, List, Any, Optional
+from typing import Dict, List, Any, Optional, Tuple, Union
 from dataclasses import dataclass, field
 from enum import Enum
-from datetime import datetime
+import json
+from datetime import datetime, timedelta
 import scipy.signal as signal
 from scipy import stats
 import threading

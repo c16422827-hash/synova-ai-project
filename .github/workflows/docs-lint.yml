@@ -9,10 +9,12 @@ jobs:
   lint:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - name: Checkout
+        uses: actions/checkout@v4
+      - uses: actions/setup-node@v4.0.3
         with:
           node-version: '20'
+          cache: 'npm'
       - name: Install linters
         run: |
           npm install -g markdownlint-cli cspell

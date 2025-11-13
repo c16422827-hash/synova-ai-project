@@ -3,7 +3,7 @@
 Quantum Neural Networks - Advanced quantum computing integration for AI
 """
 import numpy as np
-from typing import List, Dict, Any
+from typing import List, Dict
 
 class QuantumNeuralNetwork:
     """Revolutionary quantum-powered neural network"""
