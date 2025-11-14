@@ -11,24 +11,18 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - uses: actions/setup-node@v4.0.3
-        with:
-          node-version: '20'
-          cache: 'npm'
-      - name: Install linters
-        run: |
-          npm install -g markdownlint-cli cspell
-      - name: Checkout code
-        uses: actions/checkout@v4
 
-      - name: Run markdownlint
-        # This action automatically finds and uses your .markdownlint.json
-        uses: davidanson/markdownlint-cli2-action@v16
+      - name: Markdownlint (markdownlint-cli2)
+        uses: DavidAnson/markdownlint-cli2-action@v16
         with:
-          # This tells the linter to scan all .md files in the repo
           globs: |
             **/*.md
 
-      - name: Run cspell
-        # This action automatically finds and uses your cspell.json
+      - name: CSpell (Spelling)
         uses: streetsidesoftware/cspell-action@v6
+        with:
+          files: |
+            **/*.md
+          config: cspell.json
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
