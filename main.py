@@ -1,16 +1,15 @@
 # Synova AI Backend - Main API Server
 # This is the core of your AI platform that handles all requests
 
-from fastapi import FastAPI, HTTPException, Depends
+from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
-from typing import Optional, List
+from typing import Optional
 import time
 import random
 import sqlite3
 import hashlib
-from datetime import datetime, timedelta
-import json
+from datetime import datetime
 
 # Initialize the FastAPI application
 app = FastAPI(title="Synova AI API", version="1.0.0")

@@ -1,16 +1,23 @@
-name: Docs Lint (markdownlint + cspell)
+name: Lint Markdown and Spelling
 
 on:
   pull_request:
+    branches: [ "**" ]
   push:
-    branches: [ main ]
+    branches: [ "feature/**", "fix/**" ]
 
 jobs:
   lint:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
 
       - name: Markdownlint (markdownlint-cli2)
         uses: DavidAnson/markdownlint-cli2-action@v16

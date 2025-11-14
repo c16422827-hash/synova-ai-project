@@ -2,7 +2,7 @@
 """
 Temporal Learning - Advanced time-based learning and prediction
 """
-from typing import Dict, List, Any
+from typing import Dict, List
 
 class TemporalLearning:
     """Advanced temporal learning and time-based prediction system"""

@@ -2,7 +2,7 @@
 """
 Predictive Analytics - Advanced prediction and forecasting capabilities
 """
-from typing import Dict, List, Any
+from typing import Dict
 
 class PredictiveAnalytics:
     """Revolutionary predictive analytics and forecasting system"""

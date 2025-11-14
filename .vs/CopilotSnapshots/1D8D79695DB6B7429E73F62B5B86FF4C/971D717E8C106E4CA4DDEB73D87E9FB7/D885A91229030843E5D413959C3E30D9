@@ -1,4 +1,4 @@
-"""
+﻿"""
 Synova AI - Mind Resonance Interface
 Advanced Brain-Computer Interface for Thought-Based Interaction
 
@@ -14,11 +14,13 @@ Author: Neural Interface Research Lab
 """
 
 import numpy as np
+import asyncio
 import logging
-from typing import Dict, List, Any, Optional
+from typing import Dict, List, Any, Optional, Tuple, Union
 from dataclasses import dataclass, field
 from enum import Enum
-from datetime import datetime
+import json
+from datetime import datetime, timedelta
 import scipy.signal as signal
 from scipy import stats
 import threading
@@ -477,94 +479,46 @@ class MindInterface:
             "thought_categories": [cat.value for cat in ThoughtCategory]
         }
 
-    def _initialize_thought_classifier(self):
-        """Initialize thought classifier model"""
-        # TODO: Load and return the pre-trained thought classifier model
-        return "thought_classifier_model"
+# Utility functions for the Mind Interface
+class NeuralUtils:
+    """Utility functions for neural signal processing"""
 
-    def _initialize_cognitive_detector(self):
-        """Initialize cognitive state detector model"""
-        # TODO: Load and return the pre-trained cognitive state detector model
-        return "cognitive_state_detector_model"
+    @staticmethod
+    def calculate_brain_age(neural_features: Dict) -> float:
+        """Estimate brain age from neural patterns"""
+        # Simplified brain age calculation based on spectral features
+        alpha_ratio = np.mean([
+            neural_features["spectral_features"][ch]["alpha_power"] /
+            (neural_features["spectral_features"][ch]["delta_power"] + 1e-10)
+            for ch in neural_features["spectral_features"]
+        ])
 
-    def _initialize_intent_predictor(self):
-        """Initialize intent predictor model"""
-        # TODO: Load and return the pre-trained intent predictor model
-        return "intent_predictor_model"
+        # Higher alpha/delta ratio typically indicates younger brain
+        estimated_age = max(20, 80 - (alpha_ratio * 10))
+        return estimated_age
 
-# Placeholder for missing helper methods
-    async def _remove_artifacts(self, signal_data):
-        """Remove artifacts from signal data (stub implementation)"""
-        return signal_data
+    @staticmethod
+    def detect_neural_anomalies(neural_signal: NeuralSignal) -> List[Dict]:
+        """Detect potential anomalies in neural signals"""
+        anomalies = []
 
-    async def _calculate_signal_quality(self, processed_channels):
-        """Calculate signal quality score (stub implementation)"""
-        return np.random.uniform(0.7, 0.95)
+        for channel_name, data in neural_signal.channels.items():
+            # Check for amplitude anomalies
+            if np.max(np.abs(data)) > 100:  # μV
+                anomalies.append({
+                    "type": "amplitude_anomaly",
+                    "channel": channel_name,
+                    "severity": "high",
+                    "description": "Excessive amplitude detected"
+                })
 
-    async def _calculate_sample_entropy(self, data):
-        """Calculate sample entropy of the signal (stub implementation)"""
-        return np.random.uniform(0.1, 2.0)
+            # Check for flat signals
+            if np.std(data) < 0.1:
+                anomalies.append({
+                    "type": "flat_signal",
+                    "channel": channel_name, 
+                    "severity": "medium",
+                    "description": "Signal appears flat or disconnected"
+                })
 
-    async def _calculate_hjorth_mobility(self, data):
-        """Calculate Hjorth mobility of the signal (stub implementation)"""
-        return np.random.uniform(0.1, 1.0)
-
-    async def _calculate_hjorth_complexity(self, data):
-        """Calculate Hjorth complexity of the signal (stub implementation)"""
-        return np.random.uniform(0.1, 1.0)
-
-    async def _calculate_connectivity_features(self, channels_data):
-        """Calculate connectivity features between channels (stub implementation)"""
-        return {"coherence": np.random.uniform(0.0, 1.0)}
-
-    async def _predict_intentions(self, thought_patterns, cognitive_state):
-        """Predict user intentions based on thought patterns and cognitive state (stub implementation)"""
-        return ["intent_1", "intent_2"]
-
-    async def _update_neural_profile(self, user_id, neural_features, thought_patterns):
-        """Update the user's neural profile with new data (stub implementation)"""
-        pass
-
-    async def _analyze_brainwaves(self, clean_signal):
-        """Analyze brainwaves and extract features (stub implementation)"""
-        return {}
-
-    async def _calculate_neural_coherence(self, neural_features):
-        """Calculate neural coherence across channels (stub implementation)"""
-        return np.random.uniform(0.0, 1.0)
-
-    async def _get_recent_neural_activity(self, user_id):
-        """Get recent neural activity data for the user (stub implementation)"""
-        return [await self._acquire_neural_signals()]
-
-    async def _extract_advanced_features(self, signal_window):
-        """Extract advanced features from a window of neural signals (stub implementation)"""
-        return {"feature_1": 1.0, "feature_2": 2.0}
-
-    async def _ensemble_classify_thoughts(self, features, user_profile):
-        """Ensemble method to classify thoughts from features (stub implementation)"""
-        return {"thought_1": 0.8, "thought_2": 0.6}
-
-    async def _generate_thought_content(self, thought_probabilities, user_profile):
-        """Generate thought content based on probabilities (stub implementation)"""
-        return {"content": "Sample thought content", "confidence": 0.9}
-
-    async def _extract_neural_signature(self, neural_data):
-        """Extract neural signature from neural data (stub implementation)"""
-        return np.random.rand(20)
-
-    async def _extract_pattern_features(self, neural_features, window_idx):
-        """Extract features specific to thought patterns from neural features (stub implementation)"""
-        return {"feature_1": 1.0, "feature_2": 2.0}
-
-    async def _classify_thought_category(self, pattern_features):
-        """Classify the category of a thought pattern (stub implementation)"""
-        return ThoughtCategory.QUESTION
-
-    async def _generate_thought_content_from_features(self, pattern_features, category, user_profile):
-        """Generate thought content from pattern features (stub implementation)"""
-        return "Sample content based on features"
-
-    async def _calculate_pattern_confidence(self, pattern_features):
-        """Calculate confidence of the decoded thought pattern (stub implementation)"""
-        return 0.9
+        return anomalies

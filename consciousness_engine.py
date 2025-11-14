@@ -2,7 +2,7 @@
 """
 Consciousness Engine - Advanced mind reading and consciousness simulation
 """
-from typing import Dict, List, Any
+from typing import Dict, List
 
 class ConsciousnessEngine:
     """Advanced consciousness simulation and mind reading capabilities"""

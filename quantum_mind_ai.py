@@ -2,7 +2,6 @@
 import quantum_neural_networks as qnn
 import consciousness_engine as ce
 import self_evolution as se
-import predictive_analytics as pa
 import multiverse_processing as mp
 import temporal_learning as tl
 

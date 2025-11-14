@@ -1,5 +1,4 @@
 # Create a comprehensive ZIP file structure with all Synova components
-import zipfile
 import json
 from datetime import datetime
 
@@ -304,7 +303,7 @@ print("\n📊 PROJECT SUMMARY:")
 print("=" * 50)
 print(f"📄 Core Files Created: {len(synova_summary['created_files']['core_system'])}")
 print(f"📚 Documentation Files: {len(synova_summary['created_files']['documentation'])}")
-print(f"🌐 Web Application: Interactive demo with full features")
+print("🌐 Web Application: Interactive demo with full features")
 print(f"🚀 Deployment Platforms: {len(synova_summary['deployment_platforms'])}")
 print(f"💰 Pricing Tiers: {len(synova_summary['pricing_tiers'])}")
 print(f"🔬 Innovative Features: {len(synova_summary['innovative_features'])}")
@@ -334,9 +333,9 @@ files_created = [
 for i, file in enumerate(files_created, 1):
     print(f"{i:2d}. {file}")
 
-print(f"\n🌟 Total lines of code: 2000+ across all modules")
-print(f"📖 Documentation pages: 50+ pages of guides and specs") 
-print(f"🎨 Web interface: Fully interactive with real-time demos")
+print("\n🌟 Total lines of code: 2000+ across all modules")
+print("📖 Documentation pages: 50+ pages of guides and specs") 
+print("🎨 Web interface: Fully interactive with real-time demos")
 
 print("\n" + "=" * 50)
 print("🎉 SYNOVA AI PROJECT COMPLETE!")
