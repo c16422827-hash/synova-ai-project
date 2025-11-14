@@ -18,9 +18,17 @@ jobs:
       - name: Install linters
         run: |
           npm install -g markdownlint-cli cspell
+      - name: Checkout code
+        uses: actions/checkout@v4
+
       - name: Run markdownlint
-        run: |
-          markdownlint "**/*.md" || true
+        # This action automatically finds and uses your .markdownlint.json
+        uses: davidanson/markdownlint-cli2-action@v16
+        with:
+          # This tells the linter to scan all .md files in the repo
+          globs: |
+            **/*.md
+
       - name: Run cspell
-        run: |
-          cspell "**/*" --no-progress --no-must-find-files || true
+        # This action automatically finds and uses your cspell.json
+        uses: streetsidesoftware/cspell-action@v6
