@@ -1,6 +1,7 @@
 {
     "recommendations": [
         "teamsdevapp.vscode-ai-foundry",
-        "vscodevim.vim"
+        "vscodevim.vim",
+        "shyykoserhiy.git-autoconfig"
     ]
 }
