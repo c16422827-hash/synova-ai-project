@@ -1,4 +1,4 @@
-"""
+﻿"""
 Synova AI - Quantum-Neural Hybrid Intelligence System
 Core Engine Implementation v1.0.0
 
@@ -16,11 +16,14 @@ License: Proprietary - All Rights Reserved
 """
 
 import asyncio
+import threading
 import logging
-from typing import Dict, Any, List, Optional
-from dataclasses import dataclass
-from datetime import datetime
+from typing import Dict, Any, List, Optional, Union
+from dataclasses import dataclass, asdict
+from datetime import datetime, timedelta
 from enum import Enum
+import numpy as np
+import json
 import uuid
 
 class SynovaMode(Enum):

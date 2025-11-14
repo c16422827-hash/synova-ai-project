@@ -1,6 +1,8 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\fastlane"
   ],
-  "PreviewInSolutionExplorer": false
+  "SelectedNode": "\\mind_resonance_interface.py",
+  "PreviewInSolutionExplorer": true
 }

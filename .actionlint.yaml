@@ -1,2 +1,13 @@
 secrets:
   - APP_STORE_CONNECT_API_KEY_JSON
+
+env:
+  - APP_STORE_CONNECT_API_KEY_JSON
+
+actions:
+  debug:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Debug
+        run: |
+          echo "APP_STORE_CONNECT_API_KEY_JSON: ${APP_STORE_CONNECT_API_KEY_JSON}"

@@ -1,7 +1,19 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "C:\\Users\\Corey\\OneDrive\\Desktop\\synova-ai-project\\",
-  "Documents": [],
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Corey\\AppData\\Local\\Temp\\VisualStudio\\copilot-vs\\plan-69798d1d-b65d-42b7-9e73-f62b5b86ff4c.md||{B3984FB3-6A50-488A-A8A5-1EA6929ADF43}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Corey\\OneDrive\\Desktop\\synova-ai-project\\mind_resonance_interface.py||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:mind_resonance_interface.py||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Corey\\OneDrive\\Desktop\\synova-ai-project\\synova_ai_core.py||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:synova_ai_core.py||{8B382828-6202-11D1-8870-0000F87579D2}"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
@@ -9,11 +21,50 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": -1,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Bookmark",
-              "Name": "ST:0:0:{c6f34f0d-7ae5-4f3a-be61-fe0c21ae9eb8}"
+              "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "synova_ai_core.py",
+              "DocumentMoniker": "C:\\Users\\Corey\\OneDrive\\Desktop\\synova-ai-project\\synova_ai_core.py",
+              "RelativeDocumentMoniker": "synova_ai_core.py",
+              "ToolTip": "C:\\Users\\Corey\\OneDrive\\Desktop\\synova-ai-project\\synova_ai_core.py",
+              "RelativeToolTip": "synova_ai_core.py",
+              "ViewState": "AgIAAOUBAAAAAAAAAIBJwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002457|",
+              "WhenOpened": "2025-11-10T17:32:41.306Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "mind_resonance_interface.py",
+              "DocumentMoniker": "C:\\Users\\Corey\\OneDrive\\Desktop\\synova-ai-project\\mind_resonance_interface.py",
+              "RelativeDocumentMoniker": "mind_resonance_interface.py",
+              "ToolTip": "C:\\Users\\Corey\\OneDrive\\Desktop\\synova-ai-project\\mind_resonance_interface.py",
+              "RelativeToolTip": "mind_resonance_interface.py",
+              "ViewState": "AgIAADoCAAAAAAAAAIBJwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002457|",
+              "WhenOpened": "2025-11-10T17:30:47.039Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "plan-69798d1d-b65d-42b7-9e73-f62b5b86ff4c.md",
+              "DocumentMoniker": "C:\\Users\\Corey\\AppData\\Local\\Temp\\VisualStudio\\copilot-vs\\plan-69798d1d-b65d-42b7-9e73-f62b5b86ff4c.md",
+              "RelativeDocumentMoniker": "..\\..\\..\\AppData\\Local\\Temp\\VisualStudio\\copilot-vs\\plan-69798d1d-b65d-42b7-9e73-f62b5b86ff4c.md",
+              "ToolTip": "C:\\Users\\Corey\\AppData\\Local\\Temp\\VisualStudio\\copilot-vs\\plan-69798d1d-b65d-42b7-9e73-f62b5b86ff4c.md",
+              "RelativeToolTip": "..\\..\\..\\AppData\\Local\\Temp\\VisualStudio\\copilot-vs\\plan-69798d1d-b65d-42b7-9e73-f62b5b86ff4c.md",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001818|",
+              "WhenOpened": "2025-11-10T17:29:50.001Z",
+              "EditorCaption": ""
             }
           ]
         }
